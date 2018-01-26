@@ -21,6 +21,8 @@
 		4A15BA1D201B363B00FB7DE3 /* QuoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A15BA1B201B363B00FB7DE3 /* QuoteCell.swift */; };
 		4A15BA1E201B363B00FB7DE3 /* QuoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A15BA1C201B363B00FB7DE3 /* QuoteCell.xib */; };
 		4A15BA22201B3A3600FB7DE3 /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A15BA21201B3A3600FB7DE3 /* Identifiable.swift */; };
+		4A15BA24201B505D00FB7DE3 /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A15BA23201B505D00FB7DE3 /* GalleryViewController.swift */; };
+		4A15BA27201B539900FB7DE3 /* GalleryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A15BA26201B539900FB7DE3 /* GalleryViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		4A15BA1B201B363B00FB7DE3 /* QuoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteCell.swift; sourceTree = "<group>"; };
 		4A15BA1C201B363B00FB7DE3 /* QuoteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuoteCell.xib; sourceTree = "<group>"; };
 		4A15BA21201B3A3600FB7DE3 /* Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
+		4A15BA23201B505D00FB7DE3 /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
+		4A15BA26201B539900FB7DE3 /* GalleryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewModel.swift; sourceTree = "<group>"; };
 		7EDDCEBA7FAD292F756435D3 /* Pods-ZennexTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZennexTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZennexTest/Pods-ZennexTest.release.xcconfig"; sourceTree = "<group>"; };
 		8A826A379E9A0C58D192753E /* Pods-ZennexTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZennexTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZennexTest/Pods-ZennexTest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,6 +85,7 @@
 				4A15B9FD201B012B00FB7DE3 /* ViewController.swift */,
 				4A15BA1F201B3A1F00FB7DE3 /* Protocols */,
 				4A15BA16201B1E9900FB7DE3 /* Service */,
+				4A15BA25201B506600FB7DE3 /* Gallery */,
 				4A15B9FF201B012B00FB7DE3 /* Main.storyboard */,
 				4A15BA05201B012B00FB7DE3 /* Assets.xcassets */,
 				4A15BA07201B012B00FB7DE3 /* LaunchScreen.storyboard */,
@@ -109,6 +114,15 @@
 				4A15BA21201B3A3600FB7DE3 /* Identifiable.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		4A15BA25201B506600FB7DE3 /* Gallery */ = {
+			isa = PBXGroup;
+			children = (
+				4A15BA23201B505D00FB7DE3 /* GalleryViewController.swift */,
+				4A15BA26201B539900FB7DE3 /* GalleryViewModel.swift */,
+			);
+			path = Gallery;
 			sourceTree = "<group>";
 		};
 		6416A2C4BA868872F62BC03D /* Frameworks */ = {
@@ -275,6 +289,8 @@
 				4A15BA22201B3A3600FB7DE3 /* Identifiable.swift in Sources */,
 				4A15BA04201B012B00FB7DE3 /* ZennexTest.xcdatamodeld in Sources */,
 				4A15BA18201B1F7200FB7DE3 /* Quote.swift in Sources */,
+				4A15BA27201B539900FB7DE3 /* GalleryViewModel.swift in Sources */,
+				4A15BA24201B505D00FB7DE3 /* GalleryViewController.swift in Sources */,
 				4A15BA1A201B323B00FB7DE3 /* ServiceQuoteCellViewModel.swift in Sources */,
 				4A15BA15201B1E8C00FB7DE3 /* ServiceViewModel.swift in Sources */,
 			);

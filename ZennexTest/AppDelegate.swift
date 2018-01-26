@@ -26,14 +26,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     listNavigationController.tabBarItem = listTabBarItem
     viewControllers.append(listNavigationController)
     
-    let galleryViewController = UIViewController()
-    galleryViewController.title = "Gallery"
-    let galleryNavigationController = UINavigationController(rootViewController: galleryViewController)
-    let galleryTabBarItem = UITabBarItem(title: "Gallery", image: UIImage(named: "GalleryIcon"), selectedImage: UIImage(named: "GalleryIcon"))
-    galleryNavigationController.tabBarItem = galleryTabBarItem
-    viewControllers.append(galleryNavigationController)
+    if let galleryViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: GalleryViewController.identifier) as? GalleryViewController {
+      galleryViewController.title = "Gallery"
+      let galleryNavigationController = UINavigationController(rootViewController: galleryViewController)
+      let galleryTabBarItem = UITabBarItem(title: "Gallery", image: UIImage(named: "GalleryIcon"), selectedImage: UIImage(named: "GalleryIcon"))
+      galleryNavigationController.tabBarItem = galleryTabBarItem
+      viewControllers.append(galleryNavigationController)
+    }
     
-    if let serviceTableViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ServiceTableViewController") as? ServiceTableViewController {
+    
+    if let serviceTableViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: ServiceTableViewController.identifier) as? ServiceTableViewController {
       serviceTableViewController.title = "Service"
       let serviceNavigationController = UINavigationController(rootViewController: serviceTableViewController)
       let serviceTabBarItem = UITabBarItem(title: "Service", image: UIImage(named: "ServiceIcon"), selectedImage: UIImage(named: "ServiceIcon"))

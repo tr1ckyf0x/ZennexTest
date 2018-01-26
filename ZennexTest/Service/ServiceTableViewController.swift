@@ -48,3 +48,7 @@ extension ServiceTableViewController: UITableViewDelegate {
     tableView.deselectRow(at: indexPath, animated: true)
   }
 }
+
+extension ServiceTableViewController: Identifiable {
+  static var identifier: String { return "ServiceTableViewController" }
+}

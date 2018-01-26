@@ -57,5 +57,78 @@
             </objects>
             <point key="canvasLocation" x="-628.125" y="257.74647887323943"/>
         </scene>
+        <!--Gallery View Controller-->
+        <scene sceneID="RR5-oM-yWW">
+            <objects>
+                <viewController storyboardIdentifier="GalleryViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YAL-P3-wCU" customClass="GalleryViewController" customModule="ZennexTest" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LHu-xG-JWB">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x49-AG-FT1">
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <items>
+                                    <barButtonItem systemItem="rewind" id="pd4-hV-vu5">
+                                        <connections>
+                                            <action selector="backButtonPressed:" destination="YAL-P3-wCU" id="SK6-3p-rG1"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="T8R-mD-9A8"/>
+                                    <barButtonItem systemItem="fastForward" id="oVo-TU-Sfk">
+                                        <connections>
+                                            <action selector="nextButtonPressed:" destination="YAL-P3-wCU" id="Grz-jt-TYU"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nj5-YI-3vQ">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="YAL-P3-wCU" id="aWR-Ny-i5r"/>
+                                </connections>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="nj5-YI-3vQ" firstAttribute="top" secondItem="x49-AG-FT1" secondAttribute="bottom" id="1Jr-4k-keC"/>
+                            <constraint firstItem="rvR-m5-nKH" firstAttribute="trailing" secondItem="x49-AG-FT1" secondAttribute="trailing" id="2rH-65-eqt"/>
+                            <constraint firstItem="x49-AG-FT1" firstAttribute="leading" secondItem="rvR-m5-nKH" secondAttribute="leading" id="NpF-ZA-fCo"/>
+                            <constraint firstItem="nj5-YI-3vQ" firstAttribute="leading" secondItem="rvR-m5-nKH" secondAttribute="leading" id="Pjw-QU-COW"/>
+                            <constraint firstItem="rvR-m5-nKH" firstAttribute="bottom" secondItem="nj5-YI-3vQ" secondAttribute="bottom" id="czI-wN-GLf"/>
+                            <constraint firstItem="rvR-m5-nKH" firstAttribute="trailing" secondItem="nj5-YI-3vQ" secondAttribute="trailing" id="oLz-89-nDa"/>
+                            <constraint firstItem="x49-AG-FT1" firstAttribute="top" secondItem="rvR-m5-nKH" secondAttribute="top" id="rej-nu-cuF"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="rvR-m5-nKH"/>
+                    </view>
+                    <connections>
+                        <outlet property="scrollView" destination="nj5-YI-3vQ" id="V2m-EN-x5u"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eOy-rN-YCB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="219.375" y="257.74647887323943"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="VUy-Ib-4XF">
+            <objects>
+                <viewController id="Rp2-Kn-I6c" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8pW-ab-bMo">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yMz-m5-a72">
+                                <rect key="frame" x="40" y="163" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="AeO-Mg-s9R"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qss-nt-Xhz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="898" y="324"/>
+        </scene>
     </scenes>
 </document>
