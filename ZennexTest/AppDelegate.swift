@@ -18,25 +18,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     UIApplication.shared.isStatusBarHidden = false
     let tabBarController = UITabBarController()
+    var viewControllers = [UIViewController]()
     let listViewController = UIViewController()
     listViewController.title = "List"
     let listNavigationController = UINavigationController(rootViewController: listViewController)
     let listTabBarItem = UITabBarItem(title: "List", image: UIImage(named: "ListIcon"), selectedImage: UIImage(named: "ListIcon"))
     listNavigationController.tabBarItem = listTabBarItem
+    viewControllers.append(listNavigationController)
     
     let galleryViewController = UIViewController()
     galleryViewController.title = "Gallery"
     let galleryNavigationController = UINavigationController(rootViewController: galleryViewController)
     let galleryTabBarItem = UITabBarItem(title: "Gallery", image: UIImage(named: "GalleryIcon"), selectedImage: UIImage(named: "GalleryIcon"))
     galleryNavigationController.tabBarItem = galleryTabBarItem
+    viewControllers.append(galleryNavigationController)
     
-    let serviceViewController = UIViewController()
-    serviceViewController.title = "Service"
-    let serviceNavigationController = UINavigationController(rootViewController: serviceViewController)
-    let serviceTabBarItem = UITabBarItem(title: "Service", image: UIImage(named: "ServiceIcon"), selectedImage: UIImage(named: "ServiceIcon"))
-    serviceNavigationController.tabBarItem = serviceTabBarItem
+    if let serviceTableViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ServiceTableViewController") as? ServiceTableViewController {
+      serviceTableViewController.title = "Service"
+      let serviceNavigationController = UINavigationController(rootViewController: serviceTableViewController)
+      let serviceTabBarItem = UITabBarItem(title: "Service", image: UIImage(named: "ServiceIcon"), selectedImage: UIImage(named: "ServiceIcon"))
+      serviceNavigationController.tabBarItem = serviceTabBarItem
+      viewControllers.append(serviceNavigationController)
+    }
     
-    tabBarController.viewControllers = [listNavigationController, galleryNavigationController, serviceNavigationController]
+    tabBarController.viewControllers = viewControllers
     window = UIWindow(frame: UIScreen.main.bounds)
     window?.rootViewController = tabBarController
     window?.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)

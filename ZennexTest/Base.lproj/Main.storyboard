@@ -1,28 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Service Table View Controller-->
+        <scene sceneID="5Qi-th-dYX">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ZennexTest" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                <viewController storyboardIdentifier="ServiceTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Oom-Bs-CXw" customClass="ServiceTableViewController" customModule="ZennexTest" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yEQ-jg-IOC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lF6-eU-L65">
+                                <rect key="frame" x="0.0" y="10" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <sections/>
+                                <connections>
+                                    <outlet property="delegate" destination="Oom-Bs-CXw" id="hEX-Lx-b11"/>
+                                </connections>
+                            </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="qMc-gS-fxe">
+                                <rect key="frame" x="110" y="244" width="100" height="100"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="qMc-gS-fxe" secondAttribute="height" multiplier="1:1" id="WRG-8x-xSr"/>
+                                    <constraint firstAttribute="width" constant="100" id="tLH-eI-X0w"/>
+                                </constraints>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="lF6-eU-L65" firstAttribute="width" secondItem="yEQ-jg-IOC" secondAttribute="width" id="7BL-II-bbb"/>
+                            <constraint firstItem="lF6-eU-L65" firstAttribute="centerX" secondItem="dYp-eW-7Ce" secondAttribute="centerX" id="CIE-Kh-EBu"/>
+                            <constraint firstItem="qMc-gS-fxe" firstAttribute="centerY" secondItem="dYp-eW-7Ce" secondAttribute="centerY" id="aaU-9S-V5X"/>
+                            <constraint firstItem="qMc-gS-fxe" firstAttribute="centerX" secondItem="dYp-eW-7Ce" secondAttribute="centerX" id="d8m-lt-sgo"/>
+                            <constraint firstItem="lF6-eU-L65" firstAttribute="height" secondItem="yEQ-jg-IOC" secondAttribute="height" id="rNm-GO-RoD"/>
+                            <constraint firstItem="lF6-eU-L65" firstAttribute="centerY" secondItem="dYp-eW-7Ce" secondAttribute="centerY" id="zXC-4t-jVj"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="dYp-eW-7Ce"/>
                     </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="qMc-gS-fxe" id="paC-qM-wsy"/>
+                        <outlet property="tableView" destination="lF6-eU-L65" id="XJx-Sj-BVl"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3eO-VH-oMC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-628.125" y="257.74647887323943"/>
         </scene>
     </scenes>
 </document>
