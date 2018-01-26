@@ -17,6 +17,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     UIApplication.shared.isStatusBarHidden = false
+    let tabBarController = UITabBarController()
+    let listViewController = UIViewController()
+    listViewController.title = "List"
+    let listNavigationController = UINavigationController(rootViewController: listViewController)
+    let listTabBarItem = UITabBarItem(title: "List", image: UIImage(named: "ListIcon"), selectedImage: UIImage(named: "ListIcon"))
+    listNavigationController.tabBarItem = listTabBarItem
+    
+    let galleryViewController = UIViewController()
+    galleryViewController.title = "Gallery"
+    let galleryNavigationController = UINavigationController(rootViewController: galleryViewController)
+    let galleryTabBarItem = UITabBarItem(title: "Gallery", image: UIImage(named: "GalleryIcon"), selectedImage: UIImage(named: "GalleryIcon"))
+    galleryNavigationController.tabBarItem = galleryTabBarItem
+    
+    let serviceViewController = UIViewController()
+    serviceViewController.title = "Service"
+    let serviceNavigationController = UINavigationController(rootViewController: serviceViewController)
+    let serviceTabBarItem = UITabBarItem(title: "Service", image: UIImage(named: "ServiceIcon"), selectedImage: UIImage(named: "ServiceIcon"))
+    serviceNavigationController.tabBarItem = serviceTabBarItem
+    
+    tabBarController.viewControllers = [listNavigationController, galleryNavigationController, serviceNavigationController]
+    window = UIWindow(frame: UIScreen.main.bounds)
+    window?.rootViewController = tabBarController
+    window?.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+    window?.makeKeyAndVisible()
+    
     return true
   }
 
