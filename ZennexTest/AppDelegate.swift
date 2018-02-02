@@ -19,12 +19,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UIApplication.shared.isStatusBarHidden = false
     let tabBarController = UITabBarController()
     var viewControllers = [UIViewController]()
-    let listViewController = UIViewController()
-    listViewController.title = "List"
-    let listNavigationController = UINavigationController(rootViewController: listViewController)
-    let listTabBarItem = UITabBarItem(title: "List", image: UIImage(named: "ListIcon"), selectedImage: UIImage(named: "ListIcon"))
-    listNavigationController.tabBarItem = listTabBarItem
-    viewControllers.append(listNavigationController)
+    
+    if let listTableViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: ListTableViewController.identifier) as? ListTableViewController {
+      listTableViewController.title = "List"
+      let listNavigationController = UINavigationController(rootViewController: listTableViewController)
+      let listTabBarItem = UITabBarItem(title: "List", image: UIImage(named: "ListIcon"), selectedImage: UIImage(named: "ListIcon"))
+      listNavigationController.tabBarItem = listTabBarItem
+      viewControllers.append(listNavigationController)
+    }
+
     
     if let galleryViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: GalleryViewController.identifier) as? GalleryViewController {
       galleryViewController.title = "Gallery"
