@@ -31,3 +31,12 @@ func <-> <T>(property: ControlProperty<T>, variable: Variable<T>) -> Disposable 
     })
   return CompositeDisposable(bindToUIDisposable, bindToVariable)
 }
+
+class Utils {
+  static let sharedInstance = Utils()
+  private init() {
+    hourDateFormatter.dateFormat = "HH:mm"
+  }
+  
+  let hourDateFormatter = DateFormatter()
+}

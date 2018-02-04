@@ -11,21 +11,46 @@ import RxSwift
 import RxDataSources
 
 class ListViewModel {
-  var items: [EmployeeSection]
+  var items: Observable<[EmployeeSection]>
   
   init() {
-    let employeeCell = EmployeeCellViewModel(employee: Employee(fullname: "Владислав Лисянский", salary: 30000, workplace: 1, lunchTime: "10:15-12:45"))
-    let anotherEmployeeCell = EmployeeCellViewModel(employee: Employee(fullname: "Another man", salary: 99999, workplace: 42, lunchTime: "13:30-17:30"))
-    let accountantCell = AccountantCellViewModel(accountant: Accountant(fullname: "Иванов Иван", salary: 15000, workplace: 15, lunchTime: "18:00-19:00", type: .materialAccounting))
-    let managerCell = ManagerCellViewModel(manager: Manager(fullname: "Акулов Антон", salary: 34000, officeHours: "10:00-18:00"))
     
-    let employeesSection = EmployeeSection(type: .employee, items: [employeeCell, anotherEmployeeCell])
-    let accountantsSection = EmployeeSection(type: .accountant, items: [accountantCell])
-    let managersSection = EmployeeSection(type: .manager, items: [managerCell])
+    let employeeViewModels = CoreDataManager.sharedInstance.managedObjectContext.rx.entities(Employee.self)
+      .map { employees in employees.filter {
+        $0.employeeType == .employee
+        }
+        .map { employee in
+        EmployeeCellViewModel(employee: employee)
+        }
+    }
+
+    let accountantViewModels = CoreDataManager.sharedInstance.managedObjectContext.rx.entities(Accountant.self)
+      .map { accountants in
+        accountants.filter {
+          $0.employeeType == .accountant
+          }
+          .map { accountant in
+          AccountantCellViewModel(accountant: accountant)
+        }
+    }
+
+    let managerViewModels = CoreDataManager.sharedInstance.managedObjectContext.rx.entities(Manager.self)
+      .map { managers in
+        managers.filter {
+          $0.employeeType == .manager
+          }
+          .map { manager in
+          ManagerCellViewModel(manager: manager)
+        }
+    }
     
-    items = [employeesSection, accountantsSection, managersSection]
+    items = Observable.combineLatest(employeeViewModels, accountantViewModels, managerViewModels) { employees, accountants, managers in
+      [EmployeeSection(type: .employee, items: employees), EmployeeSection(type: .accountant, items: accountants), EmployeeSection(type: .manager, items: managers)]
+    }
+//    items = Observable.combineLatest(employeeViewModels, accountantViewModels) { employees, accountants in
+//      [EmployeeSection(type: .employee, items: employees), EmployeeSection(type: .accountant, items: accountants)]
+//    }
   }
-  
 }
 
 struct EmployeeSection: SectionModelType {
@@ -41,43 +66,46 @@ extension EmployeeSection  {
     self = original
     self.items = items
   }
-
+  
 }
 
 protocol ListCellViewModel {
   var model: EmployeeBase { get }
   var type: EmployeeType { get }
-  var pictureName: Variable<String> { get set }
-  var fullname: Variable<String> { get set }
-  var salary: Variable<String> { get set }
+  var pictureName: Variable<String> { get }
+  var fullname: Variable<String> { get }
+  var salary: Variable<String> { get }
 }
 
 class EmployeeCellViewModel: ListCellViewModel {
   var type: EmployeeType { return .employee }
-  var model: EmployeeBase
+  let model: EmployeeBase
   var pictureName: Variable<String>
-  var fullname: Variable<String>
-  var salary: Variable<String>
-  var workplace: Variable<String>
-  var lunchTime: Variable<String>
+  let fullname: Variable<String>
+  let salary: Variable<String>
+  let workplace: Variable<String>
+  let lunchtime: Variable<String>
   
   
   init(employee: Employee) {
     model = employee
     pictureName = Variable("EmployeeIcon")
     fullname = Variable(employee.fullname)
-    salary = Variable("\(employee.salary)")
-    workplace = Variable("\(employee.workplace)")
-    lunchTime = Variable(employee.lunchTime)
+    salary = Variable("Salary: \(employee.salary)")
+    workplace = Variable("Workplace: \(employee.workplace)")
+    let dateFormatter = Utils.sharedInstance.hourDateFormatter
+    let lunchtimeFrom = dateFormatter.string(from: employee.lunchtimeFrom)
+    let lunchtimeTo = dateFormatter.string(from: employee.lunchtimeTo)
+    lunchtime = Variable("Lunchtime: \(lunchtimeFrom)-\(lunchtimeTo)")
   }
 }
 
 class AccountantCellViewModel: EmployeeCellViewModel {
   override var type: EmployeeType { return .accountant }
-  var accountantType: Variable<AccountantType>
+  let accountantType: Variable<String>
   
   init(accountant: Accountant) {
-    accountantType = Variable(accountant.type)
+    accountantType = Variable("Type: \(accountant.accountantType.rawValue.capitalized)")
     super.init(employee: accountant as Employee)
     super.pictureName = Variable("AccountantIcon")
   }
@@ -87,15 +115,18 @@ class ManagerCellViewModel: ListCellViewModel {
   var type: EmployeeType { return .manager }
   var model: EmployeeBase
   var pictureName: Variable<String>
-  var fullname: Variable<String>
-  var salary: Variable<String>
-  var officeHours: Variable<String>
+  let fullname: Variable<String>
+  let salary: Variable<String>
+  let officehours: Variable<String>
   
   init(manager: Manager) {
     model = manager
     pictureName = Variable("ManagerIcon")
     fullname = Variable(manager.fullname)
-    salary = Variable("\(manager.salary)")
-    officeHours = Variable(manager.officeHours)
+    salary = Variable("Salary: \(manager.salary)")
+    let dateFormatter = Utils.sharedInstance.hourDateFormatter
+    let officehoursFrom = dateFormatter.string(from: manager.officehoursFrom)
+    let officehoursTo = dateFormatter.string(from: manager.officehoursTo)
+    officehours = Variable("Office hours: \(officehoursFrom)-\(officehoursTo)")
   }
 }

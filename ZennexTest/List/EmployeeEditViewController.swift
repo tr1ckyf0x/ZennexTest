@@ -52,10 +52,10 @@ class EmployeeEditViewController: UIViewController {
       (fullnameTextField.rx.text <-> viewModel.fullname).disposed(by: rx.disposeBag)
       (salaryTextField.rx.text <-> viewModel.salary).disposed(by: rx.disposeBag)
       (workplaceTextField.rx.text <-> viewModel.workplace).disposed(by: rx.disposeBag)
-      (lunchTimeFromDatePicker.rx.date <-> viewModel.lunchTimeFrom).disposed(by: rx.disposeBag)
-      (lunchTimeToDatePicker.rx.date <-> viewModel.lunchTimeTo).disposed(by: rx.disposeBag)
-      (officeHoursFromDatePicker.rx.date <-> viewModel.officeHoursFrom).disposed(by: rx.disposeBag)
-      (officeHoursToDatePicker.rx.date <-> viewModel.officeHoursTo).disposed(by: rx.disposeBag)
+      (lunchTimeFromDatePicker.rx.date <-> viewModel.lunchtimeFrom).disposed(by: rx.disposeBag)
+      (lunchTimeToDatePicker.rx.date <-> viewModel.lunchtimeTo).disposed(by: rx.disposeBag)
+      (officeHoursFromDatePicker.rx.date <-> viewModel.officehoursFrom).disposed(by: rx.disposeBag)
+      (officeHoursToDatePicker.rx.date <-> viewModel.officehoursTo).disposed(by: rx.disposeBag)
       
       viewModel.fullnameValid?
         .subscribe(onNext: { value in

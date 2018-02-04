@@ -11,15 +11,19 @@ import UIKit
 
 class ListTableRouter: Router {
   func route(to routeID: String, from context: UIViewController, parameters: Any?) {
-    guard let route = ListTableViewController.Route(rawValue: routeID) else { return }
+    guard let route = ListViewController.Route(rawValue: routeID) else { return }
     switch route {
     case .edit:
-      guard let employeeEditViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: EmployeeEditViewController.identifier) as? EmployeeEditViewController,
-      let employee = parameters as? EmployeeBase
-        else { return }
-      let employeeEditViewModel = EmployeeEditViewModel(employee: employee)
+      guard let employeeEditViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: EmployeeEditViewController.identifier) as? EmployeeEditViewController
+      else { return }
+      let employeeEditViewModel: EmployeeEditViewModel
+      if let employee = parameters as? EmployeeBase {
+        employeeEditViewModel = EmployeeEditViewModel(employee: employee)
+      } else {
+        employeeEditViewModel = EmployeeEditViewModel()
+      }
       employeeEditViewController.viewModel = employeeEditViewModel
-      employeeEditViewController.delegate = context as? EmployeeEditViewControllerDelegate
+//      employeeEditViewController.delegate = context as? EmployeeEditViewControllerDelegate
       context.navigationController?.pushViewController(employeeEditViewController, animated: true)
     }
   }

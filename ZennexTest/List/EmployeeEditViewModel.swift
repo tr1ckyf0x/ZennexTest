@@ -10,62 +10,24 @@ import Foundation
 import RxSwift
 
 class EmployeeEditViewModel {
-  var model: EmployeeBase
+  var model: EmployeeBase?
   
-  var fullname: Variable<String?>
-  var salary: Variable<String?>
+  var fullname: Variable<String?> = Variable(nil)
+  var salary: Variable<String?> = Variable(nil)
   var workplace: Variable<String?> = Variable(nil)
-  var lunchTimeFrom: Variable<Date>
-  var lunchTimeTo: Variable<Date>
-  var officeHoursFrom: Variable<Date>
-  var officeHoursTo: Variable<Date>
+  var lunchtimeFrom: Variable<Date> = Variable(Utils.sharedInstance.hourDateFormatter.date(from: "12:00")!)
+  var lunchtimeTo: Variable<Date> = Variable(Utils.sharedInstance.hourDateFormatter.date(from: "12:00")!)
+  var officehoursFrom: Variable<Date> = Variable(Utils.sharedInstance.hourDateFormatter.date(from: "12:00")!)
+  var officehoursTo: Variable<Date> = Variable(Utils.sharedInstance.hourDateFormatter.date(from: "12:00")!)
   var accountantTypeSelected: Variable<AccountantType> = Variable(.payroll)
   
   var fullnameValid: Observable<Bool>?
   var salaryValid: Observable<Bool>?
   var workplaceValid: Observable<Bool>?
   var allFieldsValid: Observable<Bool>?
-  var selectedType: Variable<EmployeeType>
+  var selectedType: Variable<EmployeeType> = Variable(EmployeeType.employee)
   
-  init(employee: EmployeeBase) {
-    let dateFormatter = DateFormatter()
-      dateFormatter.dateFormat = "HH:mm"
-    let date = dateFormatter.date(from: "12:00")!
-    lunchTimeFrom = Variable(date)
-    lunchTimeTo = Variable(date)
-    officeHoursFrom = Variable(date)
-    officeHoursTo = Variable(date)
-    model = employee
-    selectedType = Variable(model.employeeType)
-    fullname = Variable(model.fullname)
-    salary = Variable("\(model.salary)")
-    if let model = model as? Employee {
-      workplace = Variable("\(model.workplace)")
-      let lunchTime = model.lunchTime.components(separatedBy: "-")
-      let dateFormatter = DateFormatter()
-      dateFormatter.dateFormat = "HH:mm"
-      if
-        let from = dateFormatter.date(from: lunchTime[0]),
-        let to = dateFormatter.date(from: lunchTime[1]) {
-        lunchTimeFrom = Variable(from)
-        lunchTimeTo = Variable(to)
-      }
-    }
-    if let model = model as? Accountant {
-      accountantTypeSelected = Variable(model.type)
-    }
-    if let model = model as? Manager {
-      let officeHours = model.officeHours.components(separatedBy: "-")
-      let dateFormatter = DateFormatter()
-      dateFormatter.dateFormat = "HH:mm"
-      if
-        let from = dateFormatter.date(from: officeHours[0]),
-        let to = dateFormatter.date(from: officeHours[1]) {
-        officeHoursFrom = Variable(from)
-        officeHoursTo = Variable(to)
-      }
-    }
-    
+  init() {
     fullnameValid = fullname.asObservable().map { value in
       // Проверяет строку == "Иванов Иван Иванович" || "Иванов" != "Иванов " || "Иванов Иван "
       checkBy(regexPattern: "^[:alpha:]+(\\s[:alpha:]+)*$", text: value)
@@ -87,36 +49,60 @@ class EmployeeEditViewModel {
     }
   }
   
-  func getEmployee() -> EmployeeBase? {
-    guard
-      let fullname = self.fullname.value,
-      let salaryString = self.salary.value,
-      let salary = Double(salaryString)
-      else { return nil }
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "HH:mm"
+  convenience init(employee: EmployeeBase) {
+    self.init()
+    model = employee
+    selectedType.value = employee.employeeType
+    fullname.value = employee.fullname
+    salary.value = "\(employee.salary)"
+    if let model = model as? Employee {
+      workplace.value = "\(model.workplace)"
+      lunchtimeFrom.value = model.lunchtimeFrom
+      lunchtimeTo.value = model.lunchtimeTo
+    }
+    if let model = model as? Accountant {
+      accountantTypeSelected.value = model.accountantType
+    }
+    if let model = model as? Manager {
+      officehoursFrom.value = model.officehoursFrom
+      officehoursTo.value = model.officehoursTo
+    }
+  }
+  
+  func getEmployee() -> EmployeeBase {
+      let fullname = self.fullname.value!
+      let salary = Double(self.salary.value!)!
     
     switch selectedType.value {
     case .employee, .accountant:
-      guard
-      let workplaceString = self.workplace.value,
-      let workplace = Int(workplaceString)
-        else { return nil }
-      let lunchTimeFromString = dateFormatter.string(from: self.lunchTimeFrom.value)
-      let lunchTimeToString = dateFormatter.string(from: self.lunchTimeTo.value)
-      let lunchTime = "\(lunchTimeFromString)-\(lunchTimeToString)"
+      let workplace = Int(self.workplace.value!)!
       if selectedType.value == .employee {
-        return Employee(fullname: fullname, salary: salary, workplace: workplace, lunchTime: lunchTime)
+        let employee = Employee(fullname: fullname, salary: salary, workplace: workplace, lunchTimeFrom: lunchtimeFrom.value, lunchtimeTo: lunchtimeTo.value)
+        
+        if let model = model {
+          employee.id = model.id
+          _ = try? CoreDataManager.sharedInstance.managedObjectContext.rx.delete(model)
+        }
+        _ = try? CoreDataManager.sharedInstance.managedObjectContext.rx.update(employee)
+        
       } else {
-        return Accountant(fullname: fullname, salary: salary, workplace: workplace, lunchTime: lunchTime, type: accountantTypeSelected.value)
+        let accountant = Accountant(fullname: fullname, salary: salary, workplace: workplace, lunchTimeFrom: lunchtimeFrom.value, lunchtimeTo: lunchtimeTo.value, accountantType: accountantTypeSelected.value)
+        if let model = model {
+          accountant.id = model.id
+          _ = try? CoreDataManager.sharedInstance.managedObjectContext.rx.delete(model)
+        }
+        _ = try? CoreDataManager.sharedInstance.managedObjectContext.rx.update(accountant)
       }
     case .manager:
-      let officeHoursFromString = dateFormatter.string(from: officeHoursFrom.value)
-      let officeHoursToString = dateFormatter.string(from: officeHoursTo.value)
-      let officeHours = "\(officeHoursFromString)-\(officeHoursToString)"
-//      let officeHours = "\(officeHoursFromHour):\(officeHoursFromMinute)-\(officeHoursToHour):\(officeHoursToMinute)"
-      return Manager(fullname: fullname, salary: salary, officeHours: officeHours)
-    default: return nil
+      let manager = Manager(fullname: fullname, salary: salary, officehoursFrom: officehoursFrom.value, officehoursTo: officehoursTo.value)
+      if let model = model {
+        manager.id = model.id
+        _ = try? CoreDataManager.sharedInstance.managedObjectContext.rx.delete(model)
+      }
+      _ = try? CoreDataManager.sharedInstance.managedObjectContext.rx.update(manager)
+    default: fatalError("Selected unsupported EmployeeType in EmployeeEdit")
     }
+    
+    return EmployeeBase(fullname: "", salary: 0)
   }
 }

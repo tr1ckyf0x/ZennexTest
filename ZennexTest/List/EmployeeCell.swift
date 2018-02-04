@@ -34,7 +34,7 @@ class EmployeeCell: UITableViewCell {
       viewModel
         .salary
         .asObservable()
-        .map { "Salary: \($0)" }
+//        .map { "Salary: \($0)" }
         .bind(to: salaryLabel.rx.text)
         .disposed(by: reuseBag)
       
@@ -48,13 +48,13 @@ class EmployeeCell: UITableViewCell {
         employeeCellViewModel
           .workplace
           .asObservable()
-          .map { "Workplace: \($0)" }
+//          .map { "Workplace: \($0)" }
           .bind(to: workplaceLabel.rx.text)
           .disposed(by: reuseBag)
         employeeCellViewModel
-          .lunchTime
+          .lunchtime
           .asObservable()
-          .map { "Lunch time: \($0)" }
+//          .map { "Lunch time: \($0)" }
           .bind(to: lunchTimeLabel.rx.text)
           .disposed(by: reuseBag)
         
@@ -65,7 +65,7 @@ class EmployeeCell: UITableViewCell {
         accountantCellViewModel
           .accountantType
           .asObservable()
-          .map { "Type: \($0.rawValue.capitalized)" }
+//          .map { "Type: \($0.rawValue.capitalized)" }
           .bind(to: accountantTypeLabel.rx.text)
           .disposed(by: reuseBag)
         
@@ -74,9 +74,9 @@ class EmployeeCell: UITableViewCell {
         let officeHoursLabel = UILabel()
         stackView.addArrangedSubview(officeHoursLabel)
         managerCellViewModel
-          .officeHours
+          .officehours
           .asObservable()
-          .map { "Office hours: \($0)" }
+//          .map { "Office hours: \($0)" }
           .bind(to: officeHoursLabel.rx.text)
           .disposed(by: reuseBag)
         
