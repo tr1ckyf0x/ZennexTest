@@ -7,23 +7,71 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06A1C21F296FFC2B76FD9BA7 /* Pods_ZennexTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2BB000D83F87E4C9E34681 /* Pods_ZennexTest.framework */; };
+		4A0A35E820248DB30083586D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0A35E720248DB30083586D /* CoreDataManager.swift */; };
 		4A15B9FC201B012B00FB7DE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A15B9FB201B012B00FB7DE3 /* AppDelegate.swift */; };
-		4A15B9FE201B012B00FB7DE3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A15B9FD201B012B00FB7DE3 /* ViewController.swift */; };
 		4A15BA01201B012B00FB7DE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A15B9FF201B012B00FB7DE3 /* Main.storyboard */; };
 		4A15BA04201B012B00FB7DE3 /* ZennexTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A15BA02201B012B00FB7DE3 /* ZennexTest.xcdatamodeld */; };
 		4A15BA06201B012B00FB7DE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A15BA05201B012B00FB7DE3 /* Assets.xcassets */; };
 		4A15BA09201B012B00FB7DE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A15BA07201B012B00FB7DE3 /* LaunchScreen.storyboard */; };
+		4A15BA12201B19B900FB7DE3 /* ServiceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A15BA10201B19B900FB7DE3 /* ServiceTableViewController.swift */; };
+		4A15BA15201B1E8C00FB7DE3 /* ServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A15BA14201B1E8C00FB7DE3 /* ServiceViewModel.swift */; };
+		4A15BA18201B1F7200FB7DE3 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A15BA17201B1F7200FB7DE3 /* Quote.swift */; };
+		4A15BA1A201B323B00FB7DE3 /* ServiceQuoteCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A15BA19201B323B00FB7DE3 /* ServiceQuoteCellViewModel.swift */; };
+		4A15BA1D201B363B00FB7DE3 /* QuoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A15BA1B201B363B00FB7DE3 /* QuoteCell.swift */; };
+		4A15BA1E201B363B00FB7DE3 /* QuoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A15BA1C201B363B00FB7DE3 /* QuoteCell.xib */; };
+		4A15BA22201B3A3600FB7DE3 /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A15BA21201B3A3600FB7DE3 /* Identifiable.swift */; };
+		4A15BA24201B505D00FB7DE3 /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A15BA23201B505D00FB7DE3 /* GalleryViewController.swift */; };
+		4A15BA27201B539900FB7DE3 /* GalleryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A15BA26201B539900FB7DE3 /* GalleryViewModel.swift */; };
+		4A6F1B53201E1DD100CFDFAE /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6F1B52201E1DD100CFDFAE /* Utils.swift */; };
+		4A9ABA782025EA4D0097E33F /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9ABA772025EA4D0097E33F /* ListViewController.swift */; };
+		4A9ABA792026C0CB0097E33F /* EmployeeEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB0E819201DE112008698E1 /* EmployeeEditViewModel.swift */; };
+		4A9ABA7A2026C0CE0097E33F /* EmployeeEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB0E81B201DF06D008698E1 /* EmployeeEditViewController.swift */; };
+		4AB0E816201DDAD6008698E1 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB0E815201DDAD6008698E1 /* Router.swift */; };
+		4AB0E818201DDB42008698E1 /* ListTableRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB0E817201DDB42008698E1 /* ListTableRouter.swift */; };
+		4AB4D77E201C6FCC00AC332D /* EmployeeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB4D77C201C6FCC00AC332D /* EmployeeCell.swift */; };
+		4AB4D77F201C6FCC00AC332D /* EmployeeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AB4D77D201C6FCC00AC332D /* EmployeeCell.xib */; };
+		4AC0B554201C5BE500BC7A76 /* EmployeeBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC0B553201C5BE500BC7A76 /* EmployeeBase.swift */; };
+		4AC0B557201C5C9C00BC7A76 /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC0B556201C5C9C00BC7A76 /* Employee.swift */; };
+		4AC0B559201C5DF000BC7A76 /* Accountant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC0B558201C5DF000BC7A76 /* Accountant.swift */; };
+		4AC0B55B201C5F7800BC7A76 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC0B55A201C5F7800BC7A76 /* Manager.swift */; };
+		4AC0B55D201C641500BC7A76 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC0B55C201C641500BC7A76 /* ListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B2BB000D83F87E4C9E34681 /* Pods_ZennexTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZennexTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A0A35E720248DB30083586D /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		4A15B9F8201B012B00FB7DE3 /* ZennexTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZennexTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A15B9FB201B012B00FB7DE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4A15B9FD201B012B00FB7DE3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4A15BA00201B012B00FB7DE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4A15BA03201B012B00FB7DE3 /* ZennexTest.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ZennexTest.xcdatamodel; sourceTree = "<group>"; };
 		4A15BA05201B012B00FB7DE3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A15BA08201B012B00FB7DE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A15BA0A201B012B00FB7DE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4A15BA10201B19B900FB7DE3 /* ServiceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTableViewController.swift; sourceTree = "<group>"; };
+		4A15BA14201B1E8C00FB7DE3 /* ServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewModel.swift; sourceTree = "<group>"; };
+		4A15BA17201B1F7200FB7DE3 /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
+		4A15BA19201B323B00FB7DE3 /* ServiceQuoteCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceQuoteCellViewModel.swift; sourceTree = "<group>"; };
+		4A15BA1B201B363B00FB7DE3 /* QuoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteCell.swift; sourceTree = "<group>"; };
+		4A15BA1C201B363B00FB7DE3 /* QuoteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuoteCell.xib; sourceTree = "<group>"; };
+		4A15BA21201B3A3600FB7DE3 /* Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
+		4A15BA23201B505D00FB7DE3 /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
+		4A15BA26201B539900FB7DE3 /* GalleryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewModel.swift; sourceTree = "<group>"; };
+		4A6F1B52201E1DD100CFDFAE /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		4A9ABA772025EA4D0097E33F /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		4AB0E815201DDAD6008698E1 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		4AB0E817201DDB42008698E1 /* ListTableRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableRouter.swift; sourceTree = "<group>"; };
+		4AB0E819201DE112008698E1 /* EmployeeEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeEditViewModel.swift; sourceTree = "<group>"; };
+		4AB0E81B201DF06D008698E1 /* EmployeeEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeEditViewController.swift; sourceTree = "<group>"; };
+		4AB4D77C201C6FCC00AC332D /* EmployeeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeCell.swift; sourceTree = "<group>"; };
+		4AB4D77D201C6FCC00AC332D /* EmployeeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmployeeCell.xib; sourceTree = "<group>"; };
+		4AC0B553201C5BE500BC7A76 /* EmployeeBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeBase.swift; sourceTree = "<group>"; };
+		4AC0B556201C5C9C00BC7A76 /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
+		4AC0B558201C5DF000BC7A76 /* Accountant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accountant.swift; sourceTree = "<group>"; };
+		4AC0B55A201C5F7800BC7A76 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
+		4AC0B55C201C641500BC7A76 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
+		7EDDCEBA7FAD292F756435D3 /* Pods-ZennexTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZennexTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZennexTest/Pods-ZennexTest.release.xcconfig"; sourceTree = "<group>"; };
+		8A826A379E9A0C58D192753E /* Pods-ZennexTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZennexTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZennexTest/Pods-ZennexTest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06A1C21F296FFC2B76FD9BA7 /* Pods_ZennexTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +91,8 @@
 			children = (
 				4A15B9FA201B012B00FB7DE3 /* ZennexTest */,
 				4A15B9F9201B012B00FB7DE3 /* Products */,
+				D9B100A3B7DA11594602D2CA /* Pods */,
+				6416A2C4BA868872F62BC03D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,7 +108,12 @@
 			isa = PBXGroup;
 			children = (
 				4A15B9FB201B012B00FB7DE3 /* AppDelegate.swift */,
-				4A15B9FD201B012B00FB7DE3 /* ViewController.swift */,
+				4A6F1B52201E1DD100CFDFAE /* Utils.swift */,
+				4A0A35E720248DB30083586D /* CoreDataManager.swift */,
+				4A15BA1F201B3A1F00FB7DE3 /* Protocols */,
+				4A15BA16201B1E9900FB7DE3 /* Service */,
+				4A15BA25201B506600FB7DE3 /* Gallery */,
+				4AC0B555201C5BED00BC7A76 /* List */,
 				4A15B9FF201B012B00FB7DE3 /* Main.storyboard */,
 				4A15BA05201B012B00FB7DE3 /* Assets.xcassets */,
 				4A15BA07201B012B00FB7DE3 /* LaunchScreen.storyboard */,
@@ -67,6 +123,80 @@
 			path = ZennexTest;
 			sourceTree = "<group>";
 		};
+		4A15BA16201B1E9900FB7DE3 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				4A15BA10201B19B900FB7DE3 /* ServiceTableViewController.swift */,
+				4A15BA14201B1E8C00FB7DE3 /* ServiceViewModel.swift */,
+				4A15BA19201B323B00FB7DE3 /* ServiceQuoteCellViewModel.swift */,
+				4A15BA17201B1F7200FB7DE3 /* Quote.swift */,
+				4A15BA1B201B363B00FB7DE3 /* QuoteCell.swift */,
+				4A15BA1C201B363B00FB7DE3 /* QuoteCell.xib */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		4A15BA1F201B3A1F00FB7DE3 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				4A15BA21201B3A3600FB7DE3 /* Identifiable.swift */,
+				4AB0E815201DDAD6008698E1 /* Router.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		4A15BA25201B506600FB7DE3 /* Gallery */ = {
+			isa = PBXGroup;
+			children = (
+				4A15BA23201B505D00FB7DE3 /* GalleryViewController.swift */,
+				4A15BA26201B539900FB7DE3 /* GalleryViewModel.swift */,
+			);
+			path = Gallery;
+			sourceTree = "<group>";
+		};
+		4A9ABA742025C0620097E33F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4AC0B553201C5BE500BC7A76 /* EmployeeBase.swift */,
+				4AC0B556201C5C9C00BC7A76 /* Employee.swift */,
+				4AC0B558201C5DF000BC7A76 /* Accountant.swift */,
+				4AC0B55A201C5F7800BC7A76 /* Manager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4AC0B555201C5BED00BC7A76 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				4A9ABA742025C0620097E33F /* Model */,
+				4AC0B55C201C641500BC7A76 /* ListViewModel.swift */,
+				4A9ABA772025EA4D0097E33F /* ListViewController.swift */,
+				4AB0E817201DDB42008698E1 /* ListTableRouter.swift */,
+				4AB0E81B201DF06D008698E1 /* EmployeeEditViewController.swift */,
+				4AB0E819201DE112008698E1 /* EmployeeEditViewModel.swift */,
+				4AB4D77C201C6FCC00AC332D /* EmployeeCell.swift */,
+				4AB4D77D201C6FCC00AC332D /* EmployeeCell.xib */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		6416A2C4BA868872F62BC03D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3B2BB000D83F87E4C9E34681 /* Pods_ZennexTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D9B100A3B7DA11594602D2CA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8A826A379E9A0C58D192753E /* Pods-ZennexTest.debug.xcconfig */,
+				7EDDCEBA7FAD292F756435D3 /* Pods-ZennexTest.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +204,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4A15BA0D201B012B00FB7DE3 /* Build configuration list for PBXNativeTarget "ZennexTest" */;
 			buildPhases = (
+				112894731A56084D6316245F /* [CP] Check Pods Manifest.lock */,
 				4A15B9F4201B012A00FB7DE3 /* Sources */,
 				4A15B9F5201B012A00FB7DE3 /* Frameworks */,
 				4A15B9F6201B012A00FB7DE3 /* Resources */,
+				FCBCA42C2D24735C3BFD00E0 /* [CP] Embed Pods Frameworks */,
+				E998679C9D517032DEF9228B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -126,22 +259,112 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A15BA1E201B363B00FB7DE3 /* QuoteCell.xib in Resources */,
 				4A15BA09201B012B00FB7DE3 /* LaunchScreen.storyboard in Resources */,
 				4A15BA06201B012B00FB7DE3 /* Assets.xcassets in Resources */,
 				4A15BA01201B012B00FB7DE3 /* Main.storyboard in Resources */,
+				4AB4D77F201C6FCC00AC332D /* EmployeeCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		112894731A56084D6316245F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ZennexTest-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E998679C9D517032DEF9228B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZennexTest/Pods-ZennexTest-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FCBCA42C2D24735C3BFD00E0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ZennexTest/Pods-ZennexTest-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
+				"${BUILT_PRODUCTS_DIR}/NSObject+Rx/NSObject_Rx.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCoreData/RxCoreData.framework",
+				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwiftExt/RxSwiftExt.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSObject_Rx.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCoreData.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwiftExt.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZennexTest/Pods-ZennexTest-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4A15B9F4201B012A00FB7DE3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A15B9FE201B012B00FB7DE3 /* ViewController.swift in Sources */,
+				4A9ABA7A2026C0CE0097E33F /* EmployeeEditViewController.swift in Sources */,
+				4A15BA1D201B363B00FB7DE3 /* QuoteCell.swift in Sources */,
 				4A15B9FC201B012B00FB7DE3 /* AppDelegate.swift in Sources */,
+				4A15BA12201B19B900FB7DE3 /* ServiceTableViewController.swift in Sources */,
+				4AC0B55B201C5F7800BC7A76 /* Manager.swift in Sources */,
+				4A15BA22201B3A3600FB7DE3 /* Identifiable.swift in Sources */,
+				4AB0E818201DDB42008698E1 /* ListTableRouter.swift in Sources */,
+				4A0A35E820248DB30083586D /* CoreDataManager.swift in Sources */,
+				4AC0B55D201C641500BC7A76 /* ListViewModel.swift in Sources */,
+				4A6F1B53201E1DD100CFDFAE /* Utils.swift in Sources */,
+				4AC0B559201C5DF000BC7A76 /* Accountant.swift in Sources */,
+				4A9ABA792026C0CB0097E33F /* EmployeeEditViewModel.swift in Sources */,
 				4A15BA04201B012B00FB7DE3 /* ZennexTest.xcdatamodeld in Sources */,
+				4A15BA18201B1F7200FB7DE3 /* Quote.swift in Sources */,
+				4A9ABA782025EA4D0097E33F /* ListViewController.swift in Sources */,
+				4A15BA27201B539900FB7DE3 /* GalleryViewModel.swift in Sources */,
+				4AC0B554201C5BE500BC7A76 /* EmployeeBase.swift in Sources */,
+				4AC0B557201C5C9C00BC7A76 /* Employee.swift in Sources */,
+				4AB4D77E201C6FCC00AC332D /* EmployeeCell.swift in Sources */,
+				4A15BA24201B505D00FB7DE3 /* GalleryViewController.swift in Sources */,
+				4AB0E816201DDAD6008698E1 /* Router.swift in Sources */,
+				4A15BA1A201B323B00FB7DE3 /* ServiceQuoteCellViewModel.swift in Sources */,
+				4A15BA15201B1E8C00FB7DE3 /* ServiceViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,11 +499,13 @@
 		};
 		4A15BA0E201B012B00FB7DE3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A826A379E9A0C58D192753E /* Pods-ZennexTest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3HSG7M3SCR;
 				INFOPLIST_FILE = ZennexTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tr1ckyf0x.ZennexTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -291,11 +516,13 @@
 		};
 		4A15BA0F201B012B00FB7DE3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7EDDCEBA7FAD292F756435D3 /* Pods-ZennexTest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3HSG7M3SCR;
 				INFOPLIST_FILE = ZennexTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tr1ckyf0x.ZennexTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
