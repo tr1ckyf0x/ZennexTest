@@ -72,13 +72,7 @@ class ListViewController: UIViewController {
     .disposed(by: rx.disposeBag)
     tableView.rx.itemMoved
       .subscribe(onNext: { sourceIndexPath, destinationIndexPath in
-        let sourceModel = self.dataSource.sectionModels[sourceIndexPath.section].items[sourceIndexPath.row].model
-        let destinationModel = self.dataSource.sectionModels[destinationIndexPath.section].items[destinationIndexPath.row].model
-        let temp = sourceModel.order
-        sourceModel.order = destinationModel.order
-        destinationModel.order = temp
-        _ = try? CoreDataManager.sharedInstance.managedObjectContext.rx.update(sourceModel)
-        _ = try? CoreDataManager.sharedInstance.managedObjectContext.rx.update(destinationModel)
+        self.viewModel?.move(from: sourceIndexPath, to: destinationIndexPath)
       })
     .disposed(by: rx.disposeBag)
   }

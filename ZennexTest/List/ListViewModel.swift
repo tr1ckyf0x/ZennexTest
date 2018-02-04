@@ -62,6 +62,19 @@ class ListViewModel {
       }
     }
   }
+  func move(from: IndexPath, to: IndexPath) {
+    let section = from.section
+    var models = items.value[section].items.map { viewModel in
+        viewModel.model
+    }
+    let model = models.remove(at: from.row)
+    models.insert(model, at: to.row)
+    
+    models.enumerated().forEach { order, model in
+      model.order = Int32(order)
+      _ = try? CoreDataManager.sharedInstance.managedObjectContext.rx.update(model)
+    }
+  }
 }
 
 struct EmployeeSection: SectionModelType {
