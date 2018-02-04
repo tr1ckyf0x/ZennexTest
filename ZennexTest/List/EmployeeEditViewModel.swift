@@ -96,49 +96,39 @@ class EmployeeEditViewModel {
     }
   }
   
-  func getEmployee() -> EmployeeBase {
+  func saveEmployee() {
     let fullname = self.fullname.value!
     let salary = Double(self.salary.value!)!
+    var employee: EmployeeBase
     
     switch selectedType.value {
     case .employee, .accountant:
       let workplace = Int(self.workplace.value!)!
       if selectedType.value == .employee {
-        let employee = Employee(fullname: fullname, salary: salary, workplace: workplace, lunchTimeFrom: lunchtimeFrom.value, lunchtimeTo: lunchtimeTo.value)
+        employee = Employee(fullname: fullname, salary: salary, workplace: workplace, lunchTimeFrom: lunchtimeFrom.value, lunchtimeTo: lunchtimeTo.value)
         employee.order = maxEmployeesOrder.value + 1
-        
-        if let model = model {
-          if model.employeeType == employee.employeeType {
-            employee.order = model.order
-          }
-          _ = try? CoreDataManager.sharedInstance.managedObjectContext.rx.delete(model)
-        }
-        _ = try? CoreDataManager.sharedInstance.managedObjectContext.rx.update(employee)
-        
       } else {
-        let accountant = Accountant(fullname: fullname, salary: salary, workplace: workplace, lunchTimeFrom: lunchtimeFrom.value, lunchtimeTo: lunchtimeTo.value, accountantType: accountantTypeSelected.value)
-        accountant.order = maxAccountantsOrder.value + 1
-        if let model = model {
-          if model.employeeType == accountant.employeeType {
-            accountant.order = model.order
-          }
-          _ = try? CoreDataManager.sharedInstance.managedObjectContext.rx.delete(model)
-        }
-        _ = try? CoreDataManager.sharedInstance.managedObjectContext.rx.update(accountant)
+        employee = Accountant(fullname: fullname, salary: salary, workplace: workplace, lunchTimeFrom: lunchtimeFrom.value, lunchtimeTo: lunchtimeTo.value, accountantType: accountantTypeSelected.value)
+        employee.order = maxAccountantsOrder.value + 1
       }
     case .manager:
-      let manager = Manager(fullname: fullname, salary: salary, officehoursFrom: officehoursFrom.value, officehoursTo: officehoursTo.value)
-      manager.order = maxManagersOrder.value + 1
-      if let model = model {
-        if model.employeeType == manager.employeeType {
-          manager.order = model.order
-        }
-        _ = try? CoreDataManager.sharedInstance.managedObjectContext.rx.delete(model)
-      }
-      _ = try? CoreDataManager.sharedInstance.managedObjectContext.rx.update(manager)
+      employee = Manager(fullname: fullname, salary: salary, officehoursFrom: officehoursFrom.value, officehoursTo: officehoursTo.value)
+      employee.order = maxManagersOrder.value + 1
     default: fatalError("Selected unsupported EmployeeType in EmployeeEdit")
     }
     
-    return EmployeeBase(fullname: "", salary: 0)
+    if let model = model {
+      if model.employeeType == employee.employeeType {
+        employee.order = model.order
+      }
+      _ = try? CoreDataManager.sharedInstance.managedObjectContext.rx.delete(model)
+    }
+    
+    switch employee.employeeType {
+    case .employee: _ = try? CoreDataManager.sharedInstance.managedObjectContext.rx.update(employee as! Employee)
+    case .accountant: _ = try? CoreDataManager.sharedInstance.managedObjectContext.rx.update(employee as! Accountant)
+    case .manager: _ = try? CoreDataManager.sharedInstance.managedObjectContext.rx.update(employee as! Manager)
+    default: break
+    }
   }
 }

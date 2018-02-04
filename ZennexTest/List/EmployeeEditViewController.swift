@@ -129,8 +129,7 @@ class EmployeeEditViewController: UIViewController {
   }
   
   @objc func saveButtonTapped() {
-    guard let model = viewModel?.getEmployee() else { return }
-    delegate?.employeeEditViewController(self, didEditEmployee: model)
+    viewModel?.saveEmployee()
     navigationController?.popViewController(animated: true)
   }
   
