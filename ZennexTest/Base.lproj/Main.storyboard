@@ -151,7 +151,7 @@
                                 <rect key="frame" x="0.0" y="10" width="768" height="1024"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="a7b-GZ-vjB">
-                                        <rect key="frame" x="0.0" y="0.0" width="768" height="668"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="768" height="709"/>
                                         <subviews>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="RiE-MR-Ao9">
                                                 <rect key="frame" x="0.0" y="0.0" width="768" height="29"/>
@@ -160,9 +160,6 @@
                                                     <segment title="Accountant"/>
                                                     <segment title="Manager"/>
                                                 </segments>
-                                                <connections>
-                                                    <action selector="employeeTypeChanged:" destination="lwE-r8-nBd" eventType="valueChanged" id="yGX-VA-UBy"/>
-                                                </connections>
                                             </segmentedControl>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Fullname" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7zk-qL-6T8">
                                                 <rect key="frame" x="0.0" y="43" width="768" height="30"/>
@@ -182,42 +179,64 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                             </textField>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Etw-Jc-z6L">
-                                                <rect key="frame" x="0.0" y="178" width="768" height="216"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="pq3-Qj-mjw">
+                                                <rect key="frame" x="0.0" y="178" width="768" height="236.5"/>
                                                 <subviews>
-                                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="15" translatesAutoresizingMaskIntoConstraints="NO" id="Ax7-7N-Wwf">
-                                                        <rect key="frame" x="0.0" y="0.0" width="381.5" height="216"/>
-                                                        <date key="date" timeIntervalSinceReferenceDate="538834473.82545698">
-                                                            <!--2018-01-28 12:14:33 +0000-->
-                                                        </date>
-                                                    </datePicker>
-                                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="15" translatesAutoresizingMaskIntoConstraints="NO" id="smb-GI-tNT">
-                                                        <rect key="frame" x="386.5" y="0.0" width="381.5" height="216"/>
-                                                        <date key="date" timeIntervalSinceReferenceDate="538834473.82545698">
-                                                            <!--2018-01-28 12:14:33 +0000-->
-                                                        </date>
-                                                    </datePicker>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lunch time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AYl-wE-7Xo">
+                                                        <rect key="frame" x="0.0" y="0.0" width="768" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Etw-Jc-z6L">
+                                                        <rect key="frame" x="0.0" y="20.5" width="768" height="216"/>
+                                                        <subviews>
+                                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="15" translatesAutoresizingMaskIntoConstraints="NO" id="Ax7-7N-Wwf">
+                                                                <rect key="frame" x="0.0" y="0.0" width="381.5" height="216"/>
+                                                                <date key="date" timeIntervalSinceReferenceDate="538834473.82545698">
+                                                                    <!--2018-01-28 12:14:33 +0000-->
+                                                                </date>
+                                                            </datePicker>
+                                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="15" translatesAutoresizingMaskIntoConstraints="NO" id="smb-GI-tNT">
+                                                                <rect key="frame" x="386.5" y="0.0" width="381.5" height="216"/>
+                                                                <date key="date" timeIntervalSinceReferenceDate="538834473.82545698">
+                                                                    <!--2018-01-28 12:14:33 +0000-->
+                                                                </date>
+                                                            </datePicker>
+                                                        </subviews>
+                                                    </stackView>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="bFe-xT-q5s">
-                                                <rect key="frame" x="0.0" y="409" width="768" height="216"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2y5-GK-dd4">
+                                                <rect key="frame" x="0.0" y="429.5" width="768" height="236.5"/>
                                                 <subviews>
-                                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="15" translatesAutoresizingMaskIntoConstraints="NO" id="fNk-Uk-f68">
-                                                        <rect key="frame" x="0.0" y="0.0" width="381.5" height="216"/>
-                                                        <date key="date" timeIntervalSinceReferenceDate="538834473.82545698">
-                                                            <!--2018-01-28 12:14:33 +0000-->
-                                                        </date>
-                                                    </datePicker>
-                                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="15" translatesAutoresizingMaskIntoConstraints="NO" id="Jjj-kE-pBF">
-                                                        <rect key="frame" x="386.5" y="0.0" width="381.5" height="216"/>
-                                                        <date key="date" timeIntervalSinceReferenceDate="538834473.82545698">
-                                                            <!--2018-01-28 12:14:33 +0000-->
-                                                        </date>
-                                                    </datePicker>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Office hours" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jQc-fz-XI3">
+                                                        <rect key="frame" x="0.0" y="0.0" width="768" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="bFe-xT-q5s">
+                                                        <rect key="frame" x="0.0" y="20.5" width="768" height="216"/>
+                                                        <subviews>
+                                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="15" translatesAutoresizingMaskIntoConstraints="NO" id="fNk-Uk-f68">
+                                                                <rect key="frame" x="0.0" y="0.0" width="381.5" height="216"/>
+                                                                <date key="date" timeIntervalSinceReferenceDate="538834473.82545698">
+                                                                    <!--2018-01-28 12:14:33 +0000-->
+                                                                </date>
+                                                            </datePicker>
+                                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="15" translatesAutoresizingMaskIntoConstraints="NO" id="Jjj-kE-pBF">
+                                                                <rect key="frame" x="386.5" y="0.0" width="381.5" height="216"/>
+                                                                <date key="date" timeIntervalSinceReferenceDate="538834473.82545698">
+                                                                    <!--2018-01-28 12:14:33 +0000-->
+                                                                </date>
+                                                            </datePicker>
+                                                        </subviews>
+                                                    </stackView>
                                                 </subviews>
                                             </stackView>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="z8e-ln-BOm">
-                                                <rect key="frame" x="0.0" y="640" width="768" height="29"/>
+                                                <rect key="frame" x="0.0" y="681" width="768" height="29"/>
                                                 <segments>
                                                     <segment title="Payroll"/>
                                                     <segment title="Material Accounting"/>
@@ -252,10 +271,10 @@
                         <outlet property="employeeTypeSegmentedControl" destination="RiE-MR-Ao9" id="Ha0-QJ-k9v"/>
                         <outlet property="fullnameTextField" destination="7zk-qL-6T8" id="jGa-Pf-npw"/>
                         <outlet property="lunchTimeFromDatePicker" destination="Ax7-7N-Wwf" id="Kwh-tP-QHy"/>
-                        <outlet property="lunchTimeStackView" destination="Etw-Jc-z6L" id="cqe-nr-Kf1"/>
+                        <outlet property="lunchTimeStackView" destination="pq3-Qj-mjw" id="YMU-E1-vdj"/>
                         <outlet property="lunchTimeToDatePicker" destination="smb-GI-tNT" id="NuC-ai-MQI"/>
                         <outlet property="officeHoursFromDatePicker" destination="fNk-Uk-f68" id="lrI-1Y-3ke"/>
-                        <outlet property="officeHoursStackView" destination="bFe-xT-q5s" id="lnK-eJ-YCg"/>
+                        <outlet property="officeHoursStackView" destination="2y5-GK-dd4" id="vvG-2E-2uv"/>
                         <outlet property="officeHoursToDatePicker" destination="Jjj-kE-pBF" id="gJN-jH-WNw"/>
                         <outlet property="salaryTextField" destination="a0x-cn-r8b" id="azt-97-Zee"/>
                         <outlet property="stackView" destination="a7b-GZ-vjB" id="eLw-nq-bdi"/>

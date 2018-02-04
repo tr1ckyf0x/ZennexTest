@@ -10,6 +10,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+// Для проверки по регулярным выражениям следует использовать паттерн стратегия, времени не хватило.
 func checkBy(regexPattern: String, text: String?) -> Bool {
   guard let text = text else { return false }
   guard let regex = try? NSRegularExpression(pattern: regexPattern, options: .caseInsensitive) else { return false }

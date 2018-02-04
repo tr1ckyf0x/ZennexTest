@@ -11,10 +11,6 @@ import RxSwift
 import RxCocoa
 import RxSwiftExt
 
-protocol EmployeeEditViewControllerDelegate {
-  func employeeEditViewController(_ viewController: EmployeeEditViewController, didEditEmployee employee: EmployeeBase)
-}
-
 class EmployeeEditViewController: UIViewController {
   
   @IBOutlet weak var stackView: UIStackView!
@@ -35,7 +31,6 @@ class EmployeeEditViewController: UIViewController {
   var accountantViews = Set<UIView>()
   var managerViews = Set<UIView>()
   var viewModel: EmployeeEditViewModel?
-  var delegate: EmployeeEditViewControllerDelegate?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -43,7 +38,12 @@ class EmployeeEditViewController: UIViewController {
     employeeViews = [workplaceTextField, lunchTimeStackView]
     accountantViews = [accountantTypeSegmentedControl]
     managerViews = [officeHoursStackView]
-    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonTapped))
+    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: nil)
+    navigationItem.rightBarButtonItem?.rx.tap.subscribe(onNext: {
+      self.viewModel?.saveEmployee()
+      self.navigationController?.popViewController(animated: true)
+    })
+    .disposed(by: rx.disposeBag)
     if let type = viewModel?.selectedType {
       setupStackViews(forEmployeeType: type.value)
     }
@@ -89,6 +89,18 @@ class EmployeeEditViewController: UIViewController {
       .bind(to: employeeTypeSegmentedControl.rx.selectedSegmentIndex)
       .disposed(by: rx.disposeBag)
       
+      employeeTypeSegmentedControl.rx.selectedSegmentIndex
+        .map { selectedIndex -> EmployeeType? in
+          guard
+            let title = self.employeeTypeSegmentedControl.titleForSegment(at: selectedIndex)?.lowercased(),
+            let type = EmployeeType(rawValue: title)
+            else { return nil }
+          return type
+        }
+        .unwrap()
+        .bind(to: viewModel.selectedType)
+        .disposed(by: rx.disposeBag)
+      
       viewModel.selectedType.asObservable().subscribe(onNext: { value in
         self.setupStackViews(forEmployeeType: value)
       })
@@ -120,25 +132,13 @@ class EmployeeEditViewController: UIViewController {
     }
   }
   
-  @IBAction func employeeTypeChanged(_ sender: Any) {
-    guard
-      let title = employeeTypeSegmentedControl.titleForSegment(at: employeeTypeSegmentedControl.selectedSegmentIndex)?.lowercased(),
-      let type = EmployeeType(rawValue: title)
-      else { return }
-    viewModel?.selectedType.value = type
-  }
-  
-  @objc func saveButtonTapped() {
-    guard let model = viewModel?.getEmployee() else { return }
-    delegate?.employeeEditViewController(self, didEditEmployee: model)
-    navigationController?.popViewController(animated: true)
-  }
-  
   func setFieldColor(field: UITextField, isCorrect: Bool) {
     field.textColor = isCorrect ? UIColor.black : UIColor.red
   }
   
   func setupStackViews(forEmployeeType type: EmployeeType) {
+    
+    // Заменить на биндинги к viewModel?.selectedType
     
     func showNeededViews(set: Set<UIView>) {
       Set(stackView.arrangedSubviews).subtracting(set).forEach { view in
@@ -162,9 +162,7 @@ class EmployeeEditViewController: UIViewController {
       showNeededViews(set: neededViews)
     default: break
     }
-    
   }
-  
 }
 
 extension EmployeeEditViewController: Identifiable {

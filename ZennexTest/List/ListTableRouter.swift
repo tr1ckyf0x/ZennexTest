@@ -23,7 +23,6 @@ class ListTableRouter: Router {
         employeeEditViewModel = EmployeeEditViewModel()
       }
       employeeEditViewController.viewModel = employeeEditViewModel
-//      employeeEditViewController.delegate = context as? EmployeeEditViewControllerDelegate
       context.navigationController?.pushViewController(employeeEditViewController, animated: true)
     }
   }
