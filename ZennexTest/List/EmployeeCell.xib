@@ -39,7 +39,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="R5D-nM-vhz" secondAttribute="trailing" constant="20" id="0Ia-TV-owi"/>
-                    <constraint firstItem="uDE-Sb-HK4" firstAttribute="height" relation="greaterThanOrEqual" secondItem="3de-d6-giW" secondAttribute="height" id="5iY-eF-J9E"/>
+                    <constraint firstItem="uDE-Sb-HK4" firstAttribute="height" secondItem="3de-d6-giW" secondAttribute="height" id="5iY-eF-J9E"/>
                     <constraint firstItem="R5D-nM-vhz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="IzW-GZ-dgU"/>
                     <constraint firstAttribute="bottom" secondItem="R5D-nM-vhz" secondAttribute="bottom" constant="11" id="KgM-fg-Kb9"/>
                     <constraint firstItem="R5D-nM-vhz" firstAttribute="top" secondItem="uDE-Sb-HK4" secondAttribute="bottom" constant="8" id="Tcp-gk-Spy"/>

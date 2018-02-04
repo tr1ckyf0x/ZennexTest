@@ -12,6 +12,7 @@
         <attribute name="employeeTypeValue" attributeType="String" syncable="YES"/>
         <attribute name="fullname" attributeType="String" syncable="YES"/>
         <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="salary" attributeType="Double" minValueString="0" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <entity name="Manager" representedClassName="" parentEntity="EmployeeBase" syncable="YES">
@@ -21,7 +22,7 @@
     <elements>
         <element name="Accountant" positionX="27" positionY="90" width="128" height="60"/>
         <element name="Employee" positionX="0" positionY="72" width="128" height="90"/>
-        <element name="EmployeeBase" positionX="-36" positionY="9" width="128" height="105"/>
+        <element name="EmployeeBase" positionX="-36" positionY="9" width="128" height="120"/>
         <element name="Manager" positionX="54" positionY="108" width="128" height="75"/>
     </elements>
 </model>

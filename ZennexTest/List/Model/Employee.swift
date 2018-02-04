@@ -21,7 +21,8 @@ class Employee: EmployeeBase {
     self.lunchtimeFrom = lunchTimeFrom
     self.lunchtimeTo = lunchtimeTo
     super.init(fullname: fullname, salary: salary)
-    super.employeeType = .employee
+    self.employeeType = .employee
+//    super.employeeType = .employee
   }
   
   override class var entityName: String { return "Employee" }

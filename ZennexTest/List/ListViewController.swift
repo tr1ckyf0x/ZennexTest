@@ -45,6 +45,7 @@ class ListViewController: UIViewController {
   }
   
   func setupTableView() {
+    tableView.delegate = self
     let employeeCellNib = UINib(nibName: EmployeeCell.identifier, bundle: nil)
     tableView.register(employeeCellNib, forCellReuseIdentifier: EmployeeCell.identifier)
     tableView.rowHeight = UITableViewAutomaticDimension
@@ -69,6 +70,17 @@ class ListViewController: UIViewController {
         _ = try? CoreDataManager.sharedInstance.managedObjectContext.rx.delete(viewModel.model)
       })
     .disposed(by: rx.disposeBag)
+    tableView.rx.itemMoved
+      .subscribe(onNext: { sourceIndexPath, destinationIndexPath in
+        let sourceModel = self.dataSource.sectionModels[sourceIndexPath.section].items[sourceIndexPath.row].model
+        let destinationModel = self.dataSource.sectionModels[destinationIndexPath.section].items[destinationIndexPath.row].model
+        let temp = sourceModel.order
+        sourceModel.order = destinationModel.order
+        destinationModel.order = temp
+        _ = try? CoreDataManager.sharedInstance.managedObjectContext.rx.update(sourceModel)
+        _ = try? CoreDataManager.sharedInstance.managedObjectContext.rx.update(destinationModel)
+      })
+    .disposed(by: rx.disposeBag)
   }
   
   func setupBarItems() {
@@ -79,8 +91,9 @@ class ListViewController: UIViewController {
       self.editButtonItem.title = self.tableView.isEditing ? "Done" : "Edit"
     })
       .disposed(by: rx.disposeBag)
-    sortButtonItem.rx.tap.subscribe(onNext: { event in
-      print("Sort")
+    sortButtonItem.rx.tap
+      .subscribe(onNext: { event in
+        self.viewModel?.sort()
     })
       .disposed(by: rx.disposeBag)
     addButtonItem.rx.tap.subscribe(onNext: { event in
@@ -92,10 +105,18 @@ class ListViewController: UIViewController {
   func setupViewModel() {
     viewModel = ListViewModel()
     
-    viewModel?.items.bind(to: tableView.rx.items(dataSource: dataSource))
+    viewModel?.items.asObservable().bind(to: tableView.rx.items(dataSource: dataSource))
       .disposed(by: rx.disposeBag)
   }
   
+}
+
+extension ListViewController: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+    guard sourceIndexPath.section == proposedDestinationIndexPath.section else { return sourceIndexPath }
+    return proposedDestinationIndexPath
+
+  }
 }
 
 extension ListViewController: Identifiable {

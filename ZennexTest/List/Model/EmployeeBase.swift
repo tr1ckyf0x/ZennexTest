@@ -20,9 +20,11 @@ enum EmployeeType: String {
 
 
 class EmployeeBase: Persistable {
+  
   var id: String
   var fullname: String
   var salary: Double
+  var order: Int32
   private var employeeTypeValue: String
   var employeeType: EmployeeType {
     get { return EmployeeType(rawValue: employeeTypeValue)! }
@@ -33,6 +35,7 @@ class EmployeeBase: Persistable {
     self.fullname = fullname
     self.salary = salary
     self.employeeTypeValue = EmployeeType.employeeBase.rawValue
+    self.order = 0
   }
   
   typealias T = NSManagedObject
@@ -47,6 +50,7 @@ class EmployeeBase: Persistable {
     fullname = entity.value(forKey: "fullname") as! String
     salary = entity.value(forKey: "salary") as! Double
     employeeTypeValue = entity.value(forKey: "employeeTypeValue") as! String
+    order = entity.value(forKey: "order") as! Int32
   }
   
   func update(_ entity: NSManagedObject) {
@@ -54,6 +58,7 @@ class EmployeeBase: Persistable {
     entity.setValue(fullname, forKey: "fullname")
     entity.setValue(salary, forKey: "salary")
     entity.setValue(employeeTypeValue, forKey: "employeeTypeValue")
+    entity.setValue(order, forKey: "order")
     
     do {
       try entity.managedObjectContext?.save()

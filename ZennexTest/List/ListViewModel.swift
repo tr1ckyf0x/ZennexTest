@@ -11,45 +11,56 @@ import RxSwift
 import RxDataSources
 
 class ListViewModel {
-  var items: Observable<[EmployeeSection]>
+  let items: Variable<[EmployeeSection]> = Variable([])
+  var disposeBag = DisposeBag()
   
   init() {
-    
-    let employeeViewModels = CoreDataManager.sharedInstance.managedObjectContext.rx.entities(Employee.self)
-      .map { employees in employees.filter {
-        $0.employeeType == .employee
-        }
-        .map { employee in
-        EmployeeCellViewModel(employee: employee)
+    let employeeViewModels = CoreDataManager.sharedInstance.managedObjectContext.rx.entities(Employee.self, sortDescriptors: [NSSortDescriptor(key: "order", ascending: true)])
+      .map { employees in
+        employees
+          .filter { employee in employee.employeeType == .employee }
+          .map { employee in
+            EmployeeCellViewModel(employee: employee)
         }
     }
-
-    let accountantViewModels = CoreDataManager.sharedInstance.managedObjectContext.rx.entities(Accountant.self)
+    
+    let accountantViewModels = CoreDataManager.sharedInstance.managedObjectContext.rx.entities(Accountant.self, sortDescriptors: [NSSortDescriptor(key: "order", ascending: true)])
       .map { accountants in
-        accountants.filter {
-          $0.employeeType == .accountant
-          }
+        accountants
+          .filter { accountant in accountant.employeeType == .accountant }
           .map { accountant in
-          AccountantCellViewModel(accountant: accountant)
-        }
-    }
-
-    let managerViewModels = CoreDataManager.sharedInstance.managedObjectContext.rx.entities(Manager.self)
-      .map { managers in
-        managers.filter {
-          $0.employeeType == .manager
-          }
-          .map { manager in
-          ManagerCellViewModel(manager: manager)
+            AccountantCellViewModel(accountant: accountant)
         }
     }
     
-    items = Observable.combineLatest(employeeViewModels, accountantViewModels, managerViewModels) { employees, accountants, managers in
-      [EmployeeSection(type: .employee, items: employees), EmployeeSection(type: .accountant, items: accountants), EmployeeSection(type: .manager, items: managers)]
+    let managerViewModels = CoreDataManager.sharedInstance.managedObjectContext.rx.entities(Manager.self, sortDescriptors: [NSSortDescriptor(key: "order", ascending: true)])
+      .map { managers in
+        managers
+          .filter { manager in manager.employeeType == .manager }
+          .map { manager in
+            ManagerCellViewModel(manager: manager)
+        }
     }
-//    items = Observable.combineLatest(employeeViewModels, accountantViewModels) { employees, accountants in
-//      [EmployeeSection(type: .employee, items: employees), EmployeeSection(type: .accountant, items: accountants)]
-//    }
+    
+    Observable.combineLatest(employeeViewModels, accountantViewModels, managerViewModels) { employees, accountants, managers in
+      [EmployeeSection(type: .employee, items: employees), EmployeeSection(type: .accountant, items: accountants), EmployeeSection(type: .manager, items: managers)]
+      }
+      .bind(to: items)
+      .disposed(by: disposeBag)
+  }
+  
+  func sort() {
+    items.value.forEach { section in
+      section.items
+        .sorted { left, right in
+          left.model.fullname < right.model.fullname
+        }
+        .enumerated()
+        .forEach { order, viewModel in
+          viewModel.model.order = Int32(order)
+          _ = try? CoreDataManager.sharedInstance.managedObjectContext.rx.update(viewModel.model)
+      }
+    }
   }
 }
 

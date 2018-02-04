@@ -19,7 +19,8 @@ class Manager: EmployeeBase {
     self.officehoursFrom = officehoursFrom
     self.officehoursTo = officehoursTo
     super.init(fullname: fullname, salary: salary)
-    super.employeeType = .manager
+//    super.employeeType = .manager
+    self.employeeType = .manager
   }
   
   override class var entityName: String { return "Manager" }

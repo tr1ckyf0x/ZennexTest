@@ -26,7 +26,8 @@ class Accountant: Employee {
   init(fullname: String, salary: Double, workplace: Int, lunchTimeFrom: Date, lunchtimeTo: Date, accountantType: AccountantType) {
     self.accountantTypeValue = accountantType.rawValue
     super.init(fullname: fullname, salary: salary, workplace: workplace, lunchTimeFrom: lunchTimeFrom, lunchtimeTo: lunchtimeTo)
-    super.employeeType = .accountant
+    self.employeeType = .accountant
+//    super.employeeType = .accountant
   }
   
   override class var entityName: String { return "Accountant" }

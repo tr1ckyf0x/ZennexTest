@@ -26,6 +26,11 @@ class EmployeeEditViewModel {
   var workplaceValid: Observable<Bool>?
   var allFieldsValid: Observable<Bool>?
   var selectedType: Variable<EmployeeType> = Variable(EmployeeType.employee)
+  var maxEmployeesOrder: Variable<Int32> = Variable(0)
+  var maxAccountantsOrder: Variable<Int32> = Variable(0)
+  var maxManagersOrder: Variable<Int32> = Variable(0)
+  
+  var disposeBag = DisposeBag()
   
   init() {
     fullnameValid = fullname.asObservable().map { value in
@@ -40,13 +45,35 @@ class EmployeeEditViewModel {
       // Проверяет строку == "1000"
       checkBy(regexPattern: "^[:digit:]+$", text: value)
     }
-    allFieldsValid = Observable.combineLatest(fullnameValid!, salaryValid!, workplaceValid!) { fullname, salary, workplace in
+    allFieldsValid = Observable.combineLatest(fullnameValid!, salaryValid!, workplaceValid!, selectedType.asObservable()) { fullname, salary, workplace, selectedType in
       var result = fullname && salary
-      if self.selectedType.value == .employee || self.selectedType.value == .accountant {
+      if selectedType == .employee || selectedType == .accountant {
         result = result && workplace
       }
       return result
     }
+    
+    CoreDataManager.sharedInstance.managedObjectContext.rx.entities(Employee.self)
+      .map { employees in
+        employees.max(by: { left, right in left.order < right.order })?.order
+      }
+      .unwrap()
+      .bind(to: maxEmployeesOrder)
+      .disposed(by: disposeBag)
+    CoreDataManager.sharedInstance.managedObjectContext.rx.entities(Accountant.self)
+      .map { accountants in
+        accountants.max(by: { left, right in left.order < right.order })?.order
+      }
+      .unwrap()
+      .bind(to: maxAccountantsOrder)
+      .disposed(by: disposeBag)
+    CoreDataManager.sharedInstance.managedObjectContext.rx.entities(Manager.self)
+      .map { managers in
+        managers.max(by: { left, right in left.order < right.order })?.order
+      }
+      .unwrap()
+      .bind(to: maxManagersOrder)
+      .disposed(by: disposeBag)
   }
   
   convenience init(employee: EmployeeBase) {
@@ -70,33 +97,42 @@ class EmployeeEditViewModel {
   }
   
   func getEmployee() -> EmployeeBase {
-      let fullname = self.fullname.value!
-      let salary = Double(self.salary.value!)!
+    let fullname = self.fullname.value!
+    let salary = Double(self.salary.value!)!
     
     switch selectedType.value {
     case .employee, .accountant:
       let workplace = Int(self.workplace.value!)!
       if selectedType.value == .employee {
         let employee = Employee(fullname: fullname, salary: salary, workplace: workplace, lunchTimeFrom: lunchtimeFrom.value, lunchtimeTo: lunchtimeTo.value)
+        employee.order = maxEmployeesOrder.value + 1
         
         if let model = model {
-          employee.id = model.id
+          if model.employeeType == employee.employeeType {
+            employee.order = model.order
+          }
           _ = try? CoreDataManager.sharedInstance.managedObjectContext.rx.delete(model)
         }
         _ = try? CoreDataManager.sharedInstance.managedObjectContext.rx.update(employee)
         
       } else {
         let accountant = Accountant(fullname: fullname, salary: salary, workplace: workplace, lunchTimeFrom: lunchtimeFrom.value, lunchtimeTo: lunchtimeTo.value, accountantType: accountantTypeSelected.value)
+        accountant.order = maxAccountantsOrder.value + 1
         if let model = model {
-          accountant.id = model.id
+          if model.employeeType == accountant.employeeType {
+            accountant.order = model.order
+          }
           _ = try? CoreDataManager.sharedInstance.managedObjectContext.rx.delete(model)
         }
         _ = try? CoreDataManager.sharedInstance.managedObjectContext.rx.update(accountant)
       }
     case .manager:
       let manager = Manager(fullname: fullname, salary: salary, officehoursFrom: officehoursFrom.value, officehoursTo: officehoursTo.value)
+      manager.order = maxManagersOrder.value + 1
       if let model = model {
-        manager.id = model.id
+        if model.employeeType == manager.employeeType {
+          manager.order = model.order
+        }
         _ = try? CoreDataManager.sharedInstance.managedObjectContext.rx.delete(model)
       }
       _ = try? CoreDataManager.sharedInstance.managedObjectContext.rx.update(manager)
