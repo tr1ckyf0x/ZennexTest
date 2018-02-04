@@ -43,7 +43,12 @@ class EmployeeEditViewController: UIViewController {
     employeeViews = [workplaceTextField, lunchTimeStackView]
     accountantViews = [accountantTypeSegmentedControl]
     managerViews = [officeHoursStackView]
-    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonTapped))
+    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: nil)
+    navigationItem.rightBarButtonItem?.rx.tap.subscribe(onNext: {
+      self.viewModel?.saveEmployee()
+      self.navigationController?.popViewController(animated: true)
+    })
+    .disposed(by: rx.disposeBag)
     if let type = viewModel?.selectedType {
       setupStackViews(forEmployeeType: type.value)
     }
@@ -128,11 +133,6 @@ class EmployeeEditViewController: UIViewController {
     viewModel?.selectedType.value = type
   }
   
-  @objc func saveButtonTapped() {
-    viewModel?.saveEmployee()
-    navigationController?.popViewController(animated: true)
-  }
-  
   func setFieldColor(field: UITextField, isCorrect: Bool) {
     field.textColor = isCorrect ? UIColor.black : UIColor.red
   }
@@ -161,9 +161,7 @@ class EmployeeEditViewController: UIViewController {
       showNeededViews(set: neededViews)
     default: break
     }
-    
   }
-  
 }
 
 extension EmployeeEditViewController: Identifiable {
