@@ -10,6 +10,10 @@ import Foundation
 import Alamofire
 import RxSwift
 
+
+// Следует выделить API в класс с енумом ендпонитнов, и функциями, возвращающими объекты
+// Времени не хватило
+// Также добавить проверку доступности сети, повтор запроса при ошибке, вывод сообщения пользователю
 class ServiceViewModel {
   var items = Variable([ServiceQuoteCellViewModel]())
   var isDownloading = Variable(true)

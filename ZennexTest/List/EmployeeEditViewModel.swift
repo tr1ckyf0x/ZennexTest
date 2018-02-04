@@ -33,16 +33,18 @@ class EmployeeEditViewModel {
   var disposeBag = DisposeBag()
   
   init() {
+    
+    // Для проверки по регулярным выражениям следует использовать паттерн стратегия, времени не хватило.
     fullnameValid = fullname.asObservable().map { value in
-      // Проверяет строку == "Иванов Иван Иванович" || "Иванов" != "Иванов " || "Иванов Иван "
+      // Допустимые значение == "Иванов Иван Иванович" || "Иванов" != "Иванов " || "Иванов Иван "
       checkBy(regexPattern: "^[:alpha:]+(\\s[:alpha:]+)*$", text: value)
     }
     salaryValid = salary.asObservable().map { value in
-      // Проверяет строку == "1000" || "1000.0" || "1000.00"
+      // Допустимые значение == "1000" || "1000.0" || "1000.00"
       checkBy(regexPattern: "^[:digit:]+(\\.[:digit:]{1,2})?$", text: value)
     }
     workplaceValid = workplace.asObservable().map { value in
-      // Проверяет строку == "1000"
+      // Допустимые значение == "1000"
       checkBy(regexPattern: "^[:digit:]+$", text: value)
     }
     allFieldsValid = Observable.combineLatest(fullnameValid!, salaryValid!, workplaceValid!, selectedType.asObservable()) { fullname, salary, workplace, selectedType in
@@ -114,7 +116,7 @@ class EmployeeEditViewModel {
     case .manager:
       employee = Manager(fullname: fullname, salary: salary, officehoursFrom: officehoursFrom.value, officehoursTo: officehoursTo.value)
       employee.order = maxManagersOrder.value + 1
-    default: fatalError("Selected unsupported EmployeeType in EmployeeEdit")
+    default: return
     }
     
     if let model = model {

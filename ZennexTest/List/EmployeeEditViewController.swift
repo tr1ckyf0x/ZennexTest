@@ -11,10 +11,6 @@ import RxSwift
 import RxCocoa
 import RxSwiftExt
 
-protocol EmployeeEditViewControllerDelegate {
-  func employeeEditViewController(_ viewController: EmployeeEditViewController, didEditEmployee employee: EmployeeBase)
-}
-
 class EmployeeEditViewController: UIViewController {
   
   @IBOutlet weak var stackView: UIStackView!
@@ -35,7 +31,6 @@ class EmployeeEditViewController: UIViewController {
   var accountantViews = Set<UIView>()
   var managerViews = Set<UIView>()
   var viewModel: EmployeeEditViewModel?
-  var delegate: EmployeeEditViewControllerDelegate?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -142,6 +137,8 @@ class EmployeeEditViewController: UIViewController {
   }
   
   func setupStackViews(forEmployeeType type: EmployeeType) {
+    
+    // Заменить на биндинги к viewModel?.selectedType
     
     func showNeededViews(set: Set<UIView>) {
       Set(stackView.arrangedSubviews).subtracting(set).forEach { view in
