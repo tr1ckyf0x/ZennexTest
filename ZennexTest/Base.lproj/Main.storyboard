@@ -160,9 +160,6 @@
                                                     <segment title="Accountant"/>
                                                     <segment title="Manager"/>
                                                 </segments>
-                                                <connections>
-                                                    <action selector="employeeTypeChanged:" destination="lwE-r8-nBd" eventType="valueChanged" id="yGX-VA-UBy"/>
-                                                </connections>
                                             </segmentedControl>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Fullname" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7zk-qL-6T8">
                                                 <rect key="frame" x="0.0" y="43" width="768" height="30"/>

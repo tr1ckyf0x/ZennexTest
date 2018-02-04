@@ -94,6 +94,18 @@ class EmployeeEditViewController: UIViewController {
       .bind(to: employeeTypeSegmentedControl.rx.selectedSegmentIndex)
       .disposed(by: rx.disposeBag)
       
+      employeeTypeSegmentedControl.rx.selectedSegmentIndex
+        .map { selectedIndex -> EmployeeType? in
+          guard
+            let title = self.employeeTypeSegmentedControl.titleForSegment(at: selectedIndex)?.lowercased(),
+            let type = EmployeeType(rawValue: title)
+            else { return nil }
+          return type
+        }
+        .unwrap()
+        .bind(to: viewModel.selectedType)
+        .disposed(by: rx.disposeBag)
+      
       viewModel.selectedType.asObservable().subscribe(onNext: { value in
         self.setupStackViews(forEmployeeType: value)
       })
@@ -123,14 +135,6 @@ class EmployeeEditViewController: UIViewController {
       .bind(to: viewModel.accountantTypeSelected)
       .disposed(by: rx.disposeBag)
     }
-  }
-  
-  @IBAction func employeeTypeChanged(_ sender: Any) {
-    guard
-      let title = employeeTypeSegmentedControl.titleForSegment(at: employeeTypeSegmentedControl.selectedSegmentIndex)?.lowercased(),
-      let type = EmployeeType(rawValue: title)
-      else { return }
-    viewModel?.selectedType.value = type
   }
   
   func setFieldColor(field: UITextField, isCorrect: Bool) {
