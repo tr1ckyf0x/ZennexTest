@@ -19,14 +19,12 @@ class Manager: EmployeeBase {
     self.officehoursFrom = officehoursFrom
     self.officehoursTo = officehoursTo
     super.init(fullname: fullname, salary: salary)
-//    super.employeeType = .manager
     self.employeeType = .manager
   }
   
   override class var entityName: String { return "Manager" }
   
   required init(entity: T) {
-    
     officehoursFrom = entity.value(forKey: "officehoursFrom") as! Date
     officehoursTo = entity.value(forKey: "officehoursTo") as! Date
     super.init(entity: entity)
