@@ -27,6 +27,9 @@ class ServiceViewModel {
           else { print("Can not load data"); return }
         do {
           let decoder = JSONDecoder()
+          let dateFormatter = DateFormatter()
+          dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+          decoder.dateDecodingStrategy = .formatted(dateFormatter)
           self.items.value = try decoder
             .decode(BashQuotes.self, from: data)
             .quotes
