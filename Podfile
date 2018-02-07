@@ -11,4 +11,5 @@ target 'ZennexTest' do
     pod 'RxSwiftExt'
     pod 'Alamofire', '~> 4.5'
     pod 'IQKeyboardManagerSwift', '5.0.0'
+    pod 'Moya/RxSwift', '~> 10.0'
 end
