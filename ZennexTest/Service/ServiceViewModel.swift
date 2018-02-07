@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 import RxSwift
-
+import Moya
 
 // Следует выделить API в класс с енумом ендпонитнов, и функциями, возвращающими объекты
 // Времени не хватило
@@ -17,24 +17,30 @@ import RxSwift
 class ServiceViewModel {
   var items = Variable([ServiceQuoteCellViewModel]())
   var isDownloading = Variable(true)
+  let bashService = MoyaProvider<BashService>()
+  let disposeBag = DisposeBag()
   
   init() {
-    Alamofire
-      .request("http://quotes.zennex.ru/api/v3/bash/quotes?sort=time")
-      .responseData { response in
+    let decoder = JSONDecoder()
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    decoder.dateDecodingStrategy = .formatted(dateFormatter)
+    bashService.rx.request(.getQuotes)
+      .map(BashResponse.self, atKeyPath: nil, using: decoder)
+      .map { bashResponse in
+        bashResponse.quotes.map { ServiceQuoteCellViewModel(quote: $0) }
+      }
+      .asObservable()
+      .do(onError: { error in
+        print(error)
         self.isDownloading.value = false
-        guard let data = response.result.value
-          else { print("Can not load data"); return }
-        do {
-          let decoder = JSONDecoder()
-          let dateFormatter = DateFormatter()
-          dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-          decoder.dateDecodingStrategy = .formatted(dateFormatter)
-          self.items.value = try decoder
-            .decode(BashQuotes.self, from: data)
-            .quotes
-            .map { ServiceQuoteCellViewModel(quote: $0) }
-        } catch { print("Can not decode data") }
-    }
+      },
+          onCompleted: {
+            self.isDownloading.value = false
+      })
+      .retry(3)
+      .catchErrorJustComplete()
+      .bind(to: items)
+      .disposed(by: disposeBag)
   }
 }

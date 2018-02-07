@@ -8,7 +8,7 @@
 
 import Foundation
 
-class BashQuotes: Codable {
+class BashResponse: Codable {
   let total: UInt
   let last: Date
   let quotes: [Quote]
