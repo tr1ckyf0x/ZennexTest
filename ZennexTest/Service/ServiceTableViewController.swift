@@ -30,6 +30,7 @@ class ServiceTableViewController: UIViewController {
     tableView.register(quoteCellNib, forCellReuseIdentifier: QuoteCell.identifier)
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 150
+    tableView.allowsSelection = false
     
     viewModel?
       .items
@@ -39,13 +40,6 @@ class ServiceTableViewController: UIViewController {
       }
       .disposed(by: rx.disposeBag)
     
-  }
-  
-}
-
-extension ServiceTableViewController: UITableViewDelegate {
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    tableView.deselectRow(at: indexPath, animated: true)
   }
 }
 

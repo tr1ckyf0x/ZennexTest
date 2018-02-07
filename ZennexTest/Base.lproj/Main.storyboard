@@ -23,9 +23,6 @@
                                 <rect key="frame" x="0.0" y="10" width="768" height="1024"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <sections/>
-                                <connections>
-                                    <outlet property="delegate" destination="Oom-Bs-CXw" id="hEX-Lx-b11"/>
-                                </connections>
                             </tableView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="qMc-gS-fxe">
                                 <rect key="frame" x="334" y="472" width="100" height="100"/>
