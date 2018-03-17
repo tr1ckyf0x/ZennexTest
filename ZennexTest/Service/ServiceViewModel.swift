@@ -11,16 +11,20 @@ import Alamofire
 import RxSwift
 import Moya
 
-// Следует выделить API в класс с енумом ендпонитнов, и функциями, возвращающими объекты
-// Времени не хватило
-// Также добавить проверку доступности сети, повтор запроса при ошибке, вывод сообщения пользователю
+// Добавить проверку доступности сети, повтор запроса при ошибке, вывод сообщения пользователю
 class ServiceViewModel {
   var items = Variable([ServiceQuoteCellViewModel]())
   var isDownloading = Variable(true)
+  let shouldShowErrorAlert = Variable(false)
   let bashService = MoyaProvider<BashService>()
   let disposeBag = DisposeBag()
   
   init() {
+    updateData()
+  }
+  
+  func updateData() {
+    isDownloading.value = true
     let decoder = JSONDecoder()
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -30,16 +34,17 @@ class ServiceViewModel {
       .map { bashResponse in
         bashResponse.quotes.map { ServiceQuoteCellViewModel(quote: $0) }
       }
+      .retry(3)
       .asObservable()
       .do(onError: { error in
         print(error)
-        self.isDownloading.value = false
-      },
-          onCompleted: {
-            self.isDownloading.value = false
+        self.shouldShowErrorAlert.value = true
       })
-      .retry(3)
+      .do(onDispose: { print("bashServiceRequest disposed") })
       .catchErrorJustComplete()
+      .do(onCompleted: {
+        self.isDownloading.value = false
+      })
       .bind(to: items)
       .disposed(by: disposeBag)
   }
